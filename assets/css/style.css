@@ -18,8 +18,10 @@
   --bg-alt:      #F1EEE9;
   --ink:         var(--black);
   --ink-soft:    #5B5650;
-  --ink-faint:   var(--taupe);
-  --rule:        #E2DDD5;
+  /* Stessa tinta del taupe di brand ma più scura: sul cream il taupe puro
+     starebbe a 2.7:1, sotto la soglia di leggibilità. */
+  --ink-faint:   #71675B;
+  --rule:        #D5CEC3;
   --accent:      var(--navy);
 
   /* Tipografia */
@@ -45,8 +47,11 @@
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-/* Variante scura — usata da ALTEREGØ SPORT e dai blocchi core neri */
+/* Variante scura — usata da ALTEREGØ SPORT e dai blocchi core neri.
+   Sul nero il taupe di brand è leggibile (6.1:1), quindi torna a fare
+   il colore dei testi tenui. */
 .theme-dark {
+  color-scheme: dark;
   --bg:        var(--black);
   --bg-alt:    #232323;
   --ink:       var(--cream);
@@ -85,11 +90,16 @@ a { color: inherit; text-decoration: none; }
 a:focus-visible,
 button:focus-visible,
 [tabindex]:focus-visible {
-  outline: 1px solid var(--accent);
+  outline: 2px solid var(--accent);
   outline-offset: 4px;
 }
 
 ::selection { background: var(--navy); color: var(--cream); }
+
+/* Sul nero il navy sparisce: serve un'evidenziazione chiara. */
+.theme-dark ::selection,
+.section--dark ::selection,
+.site-footer ::selection { background: var(--sand); color: var(--black); }
 
 /* --- Utility ----------------------------------------------------------- */
 
@@ -182,10 +192,11 @@ button:focus-visible,
   letter-spacing: 0;
 }
 
-/* Il monogramma æ */
+/* Il monogramma æ. Grande di suo: sovrascrivi solo per cambiarne la scala. */
 .mark {
   font-family: var(--serif);
   font-weight: 300;
+  font-size: clamp(3rem, 8vw, 5.5rem);
   line-height: 1;
   letter-spacing: 0;
 }
@@ -287,10 +298,17 @@ button:focus-visible,
     background: var(--bg);
     border-bottom: 1px solid var(--rule);
     transform: translateY(-120%);
-    transition: transform 0.45s var(--ease);
+    /* visibility, non solo transform: altrimenti il menu chiuso resta
+       raggiungibile con il tasto Tab e annunciato dagli screen reader. */
+    visibility: hidden;
+    transition: transform 0.45s var(--ease), visibility 0s linear 0.45s;
   }
 
-  .nav[data-open="true"] { transform: translateY(0); }
+  .nav[data-open="true"] {
+    transform: translateY(0);
+    visibility: visible;
+    transition-delay: 0s;
+  }
 
   .nav a {
     width: 100%;
@@ -308,11 +326,16 @@ button:focus-visible,
 
 .section--alt { background: var(--bg-alt); }
 
+/* Ribalta l'intera terna di token, --bg compreso: i componenti che leggono
+   --bg (i bottoni all'hover, per esempio) sono dentro queste sezioni. */
 .section--dark {
   background: var(--black);
   color: var(--cream);
+  --bg: var(--black);
+  --bg-alt: #232323;
   --ink: var(--cream);
   --ink-soft: #B9B3AB;
+  --ink-faint: var(--taupe);
   --rule: #343434;
   --accent: var(--sand);
 }
@@ -352,6 +375,7 @@ button:focus-visible,
   position: relative;
   isolation: isolate;
   color: var(--cream);
+  --bg: #141414;
   --ink: var(--cream);
   --ink-soft: #DAD5CD;
   --ink-faint: var(--sand);
@@ -387,6 +411,19 @@ button:focus-visible,
 .grid--3 { grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
 .grid--4 { grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr)); }
 
+/* Griglie fitte: molte celle piccole. È il formato giusto per i ritagli a bassa
+   risoluzione, che a piena larghezza si sgranerebbero e qui invece reggono. */
+.grid--tight {
+  grid-template-columns: repeat(auto-fit, minmax(min(150px, 45%), 1fr));
+  gap: clamp(0.6rem, 0.3rem + 1vw, 1.1rem);
+}
+
+/* Il lookbook vero e proprio: celle medie, senza didascalia sotto ciascuna. */
+.grid--gallery {
+  grid-template-columns: repeat(auto-fit, minmax(min(190px, 47%), 1fr));
+  gap: clamp(0.6rem, 0.3rem + 1vw, 1.1rem);
+}
+
 /* Griglia editoriale: la prima cella occupa due colonne su schermi larghi */
 @media (min-width: 900px) {
   .grid--feature > :first-child { grid-column: span 2; }
@@ -403,9 +440,10 @@ button:focus-visible,
   aspect-ratio: 4 / 5;
 }
 
-.figure__media--wide   { aspect-ratio: 3 / 2; }
-.figure__media--square { aspect-ratio: 1 / 1; }
-.figure__media--tall   { aspect-ratio: 3 / 4; }
+.figure__media--wide     { aspect-ratio: 3 / 2; }
+.figure__media--square   { aspect-ratio: 1 / 1; }
+.figure__media--tall     { aspect-ratio: 3 / 4; }
+.figure__media--portrait { aspect-ratio: 1 / 2; }
 
 .figure__media img {
   width: 100%;
@@ -414,11 +452,29 @@ button:focus-visible,
   transition: transform 1.2s var(--ease);
 }
 
+/* Per le immagini che non vanno ritagliate — un lockup, un'etichetta:
+   entrano per intero e il fondo riempie il resto. */
+.figure__media--contain     { aspect-ratio: 3 / 2; }
+.figure__media--contain img { object-fit: contain; }
+
 .figure figcaption {
   margin-top: 0.9rem;
   font-size: var(--t-sm);
   color: var(--ink-soft);
 }
+
+/* Dentro una griglia fitta la didascalia si rimpicciolisce, altrimenti pesa
+   più dell'immagine che accompagna. */
+.grid--tight .figure figcaption,
+.grid--gallery .figure figcaption {
+  margin-top: 0.55rem;
+  font-size: var(--t-xs);
+  letter-spacing: 0.04em;
+  line-height: 1.45;
+}
+
+.grid--tight .figure__label,
+.grid--gallery .figure__label { letter-spacing: 0.16em; }
 
 .figure__label {
   display: block;
@@ -459,7 +515,12 @@ button:focus-visible,
   transition: background-color 0.5s var(--ease), border-color 0.5s var(--ease);
 }
 
-.card--type:hover { background: var(--bg-alt); border-color: var(--ink-faint); }
+/* Solo le card che sono davvero un link reagiscono al passaggio del mouse.
+   Il velo si calcola dall'inchiostro, così funziona su qualunque fondo. */
+a.card--type:hover {
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+  border-color: var(--ink-faint);
+}
 
 /* --- Blocco statement -------------------------------------------------- */
 
@@ -566,9 +627,11 @@ blockquote.pull {
 
 .swatch { display: flex; flex-direction: column; gap: 0.6rem; width: 6.5rem; }
 
+/* Il bordo si calcola dall'inchiostro: il campione cream sta su fondo cream
+   e senza un contorno visibile sparirebbe. */
 .swatch__chip {
   aspect-ratio: 1 / 1;
-  border: 1px solid var(--rule);
+  border: 1px solid color-mix(in srgb, var(--ink) 40%, transparent);
 }
 
 .swatch__name {
@@ -619,6 +682,8 @@ blockquote.pull {
 .site-footer {
   background: var(--black);
   color: var(--cream);
+  --bg: var(--black);
+  --bg-alt: #232323;
   --ink: var(--cream);
   --ink-soft: #B9B3AB;
   --ink-faint: var(--taupe);
@@ -691,5 +756,17 @@ blockquote.pull {
 
 @media print {
   .site-header, .nav-toggle, .site-footer { display: none; }
-  body { background: #fff; color: #000; }
+
+  /* Riporta al chiaro anche i token, non solo body: senza questo le sezioni
+     scure restano col loro fondo e stampano nero su nero. */
+  body, .theme-dark, .section--dark {
+    background: #fff;
+    color: #000;
+    --bg: #fff;
+    --bg-alt: #fff;
+    --ink: #000;
+    --ink-soft: #333;
+    --ink-faint: #555;
+    --rule: #ccc;
+  }
 }

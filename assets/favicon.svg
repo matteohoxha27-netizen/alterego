@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#1A1A1A"/>
+  <text x="32" y="33" fill="#FAF9F7"
+        font-family="Iowan Old Style, Palatino, Georgia, serif"
+        font-size="42" font-weight="300"
+        text-anchor="middle" dominant-baseline="central">æ</text>
+</svg>
