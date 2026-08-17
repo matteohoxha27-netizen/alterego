@@ -110,10 +110,34 @@ nei singoli frame — nessuna è usabile intera su mobile.
 
 ---
 
-## 4. Decisioni aperte
+## 4. Decisioni prese (2026-08-17)
 
-1. Quali linee mette il sito: solo premium, premium + statement, o anche sport e donna
-2. Lockup logo definitivo: `alteregø` o `ALTEREGO`
-3. Stagione: le board dicono S/S 2025, il sito va online nel 2026
-4. Il sito è vetrina/lookbook o e-commerce con carrello
-5. I prezzi del brand book donna sono pubblicabili o interni
+| Domanda | Decisione |
+|---|---|
+| Quali linee mette il sito | Tutte e quattro: Premium, Statement, Women, Sport |
+| Lockup logo definitivo | `alteregø` minuscolo, o barrata. `AØ` solo per la linea Sport |
+| Stagione | Nessun riferimento ad anno o stagione: le board dicono S/S 2025, il sito è del 2026 |
+| Vetrina o e-commerce | Vetrina / lookbook statico su GitHub Pages, nessun carrello |
+| Prezzi donna | Interni, non pubblicati |
+
+---
+
+## 5. Il problema aperto: le foto
+
+Le board sono tutte a **massimo 1280px di lato** e impaginate su 5-8 colonne: ritagliando
+un singolo riquadro si ottengono 160-290px, sotto la soglia dell'usabile sul web.
+Il risultato dell'estrazione (vedi `assets/img/MANIFEST.md`) è sbilanciato:
+
+| Linea | Foto utilizzabili | Situazione |
+|---|---|---|
+| Statement | 12 | Coperta bene: la capsule completa in bianco e in nero |
+| Premium | 2 + 3 macro di dettaglio | Solo il mondo *core nero*. Il lino/Capri — la linea principale — non ha nessuna foto |
+| Women | 0 | Scoperta |
+| Sport | 0 | Scoperta |
+
+Le pagine Women e Sport sono quindi interamente tipografiche. Per superare il limite
+servono i **file originali** degli scatti e dei render, oppure le board riesportate a
+risoluzione piena — non c'è nulla da recuperare da questi JPEG.
+
+Nota: `PHOTO-2026-07-23-19-48-12.jpg` è la stessa immagine di `PHOTO-2026-07-28-20-53-12 5.jpg`
+ricompressa — un secondo duplicato oltre a quello già segnalato sopra.
