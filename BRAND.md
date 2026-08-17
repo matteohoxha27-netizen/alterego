@@ -128,16 +128,30 @@ Le board sono tutte a **massimo 1280px di lato** e impaginate su 5-8 colonne: ri
 un singolo riquadro si ottengono 160-290px, sotto la soglia dell'usabile sul web.
 Il risultato dell'estrazione (vedi `assets/img/MANIFEST.md`) è sbilanciato:
 
-| Linea | Foto utilizzabili | Situazione |
-|---|---|---|
-| Statement | 12 | Coperta bene: la capsule completa in bianco e in nero |
-| Premium | 2 + 3 macro di dettaglio | Solo il mondo *core nero*. Il lino/Capri — la linea principale — non ha nessuna foto |
-| Women | 0 | Scoperta |
-| Sport | 0 | Scoperta |
+Una prima estrazione con soglia 300px aveva dato solo 17 ritagli. Abbassando la soglia a
+150px — perché un ritaglio piccolo in una griglia fitta è comunque meglio di nessuna foto —
+si arriva a **159 ritagli**, descritti in `assets/img/MANIFEST.md`:
 
-Le pagine Women e Sport sono quindi interamente tipografiche. Per superare il limite
-servono i **file originali** degli scatti e dei render, oppure le board riesportate a
-risoluzione piena — non c'è nulla da recuperare da questi JPEG.
+| Linea | Ritagli | Larghezza mediana | Situazione |
+|---|---|---|---|
+| Premium | 70 | 176px | Coperta: ritratti, 8 look con nome, lookbook, flat lay, colorway, macro |
+| Statement | 18 | 352px | Abbondante, e sono le foto migliori del lotto |
+| Brand | 15 | 248px | Ricamo, etichette, hangtag, packaging, lockup |
+| Sport | 28 | 142px | Tutti i 21 prodotti, ma metà sotto i 150px: solo griglie fitte, niente hero |
+| Women | 28 | 74px | **Ancora il punto debole** |
+
+**Women resta scoperta** e non è un problema di criteri: la board è 853×1280 con le dodici
+celle della capsule affiancate su una riga sola, quindi ogni pezzo esce a 60-74px. Solo cinque
+soggetti superano i 150px (la striscia dei quattro look, il ritratto in bianco e nero, il
+mosaico 2×2, l'abito halter, la modella in camicia di lino). Bastano a togliere il tutto-testo,
+non a fare un lookbook.
+
+Per Women servono i **file originali** degli scatti, o il file di progetto da cui la board è
+stata esportata (Canva, Figma, InDesign): da lì i singoli scatti escono a piena risoluzione.
+Da questi JPEG non c'è altro da recuperare.
+
+La board donna è stata rinominata dal proprietario in `img/woman.jpg` — è lo stesso file di
+`PHOTO-2026-07-28-20-55-15.jpg`, non una versione più grande.
 
 Nota: `PHOTO-2026-07-23-19-48-12.jpg` è la stessa immagine di `PHOTO-2026-07-28-20-53-12 5.jpg`
 ricompressa — un secondo duplicato oltre a quello già segnalato sopra.
