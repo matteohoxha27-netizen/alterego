@@ -1,0 +1,73 @@
+:root{
+  --sand:#c9c1b6;
+  --offwhite:#faf9f7;
+  --taupe:#a2988c;
+  --navy:#1b2438;
+  --black:#1a1a1a;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:clamp(3rem,12vh,7rem);
+  padding:2rem;
+  background:var(--offwhite);
+  color:var(--black);
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+}
+
+.stage{text-align:center}
+
+.mark{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(3.5rem,9vw,6rem);
+  line-height:1;
+  color:var(--black);
+}
+
+.wordmark{
+  margin-top:.35em;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(2rem,6vw,3.5rem);
+  font-weight:400;
+  letter-spacing:.02em;
+}
+
+.tier{
+  margin-top:.9em;
+  font-size:.7rem;
+  letter-spacing:.55em;
+  text-indent:.55em;
+  color:var(--taupe);
+}
+
+.claim{
+  margin-top:3.5rem;
+  font-size:clamp(.85rem,2.2vw,1rem);
+  line-height:2;
+  letter-spacing:.06em;
+  color:var(--navy);
+}
+
+.soon{
+  margin-top:2.5rem;
+  font-size:.65rem;
+  letter-spacing:.4em;
+  text-indent:.4em;
+  text-transform:uppercase;
+  color:var(--sand);
+}
+
+.payoff{
+  font-size:.6rem;
+  letter-spacing:.45em;
+  text-indent:.45em;
+  color:var(--taupe);
+}
